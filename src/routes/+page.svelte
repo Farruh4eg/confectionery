@@ -1,10 +1,9 @@
 <script lang="ts">
   export let data;
-  $: console.log(data);
 </script>
 
 <main
-  class="w-[1000px] mx-auto flex flex-col gap-y-8 items-center p-4 bg-white mt-8 shadow-md rounded-xl border border-gray-100"
+  class="w-[1000px] mx-auto flex flex-col gap-y-8 items-center p-6 bg-white shadow-md rounded-xl border border-gray-100"
 >
   <h1 class="font-bold text-3xl">Самые продаваемые изделия</h1>
   <table class="text-center border border-gray-300 w-4/5 text-xl">

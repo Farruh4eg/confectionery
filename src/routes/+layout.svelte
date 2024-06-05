@@ -3,11 +3,37 @@
 </script>
 
 <nav
-  class="w-[1000px] bg-white mx-auto rounded-b-lg border border-gray-300 flex gap-x-2 justify-evenly p-2 text-xl shadow-sm"
+  class="w-[1000px] bg-white mx-auto rounded-b-lg border border-gray-300 flex gap-x-2 justify-evenly p-2 text-xl shadow-sm mb-8"
 >
   <a
+    href="/"
+    class="flex flex-col gap-y-1 hover:bg-gray-100 rounded-lg py-2 px-6 justify-end"
+  >
+    <svg
+      fill="#0000F9"
+      class="h-8"
+      version="1.1"
+      id="Capa_1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 360 360"
+      xml:space="preserve"
+      stroke="#0000F9"
+      ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+        id="SVGRepo_tracerCarrier"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></g><g id="SVGRepo_iconCarrier">
+        <path
+          d="M352.163,163.115L198.919,9.871c-10.449-10.449-27.389-10.449-37.838,0L7.837,163.115c-7.652,7.652-9.94,19.16-5.8,29.158 c4.142,9.998,13.898,16.516,24.719,16.516h20.762v114.574c0,19.112,15.493,34.603,34.603,34.603h195.758 c19.11,0,34.603-15.492,34.603-34.603V208.789h20.762c10.821,0,20.578-6.519,24.719-16.516 C362.103,182.275,359.815,170.767,352.163,163.115z M220.431,307.785h-80.862v-45.583c0-22.33,18.102-40.431,40.431-40.431 s40.431,18.1,40.431,40.431V307.785z"
+        ></path>
+      </g></svg
+    >
+    Главная</a
+  >
+  <a
     href="/add"
-    class="flex flex-col gap-y-1 hover:bg-gray-100 rounded-lg py-2 px-6"
+    class="flex flex-col gap-y-1 hover:bg-gray-100 rounded-lg py-2 px-6 justify-end"
   >
     <svg
       viewBox="0 0 24 24"
@@ -35,7 +61,7 @@
   >
   <a
     href="/edit"
-    class="flex flex-col gap-y-1 hover:bg-gray-100 rounded-lg py-2 px-6"
+    class="flex flex-col gap-y-1 hover:bg-gray-100 rounded-lg py-2 px-6 justify-end"
   >
     <svg
       viewBox="0 0 24 24"
@@ -55,61 +81,53 @@
         ></path>
       </g></svg
     >
-    Изменить</a
+    Редактировать</a
   >
   <a
-    href="/delete"
-    class="flex flex-col gap-y-1 hover:bg-gray-100 rounded-lg py-2 px-6"
+    href="/employees"
+    class="flex flex-col gap-y-1 hover:bg-gray-100 rounded-lg py-2 px-6 justify-end"
   >
     <svg
-      viewBox="0 0 24 24"
-      fill="none"
+      class="h-8"
+      version="1.1"
+      id="_x32_"
       xmlns="http://www.w3.org/2000/svg"
-      class="h-9"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 512 512"
+      xml:space="preserve"
+      fill="#000000"
       ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
         id="SVGRepo_tracerCarrier"
         stroke-linecap="round"
         stroke-linejoin="round"
       ></g><g id="SVGRepo_iconCarrier">
-        <path
-          d="M10 11V17"
-          stroke="#F90000"
-          stroke-width="1"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></path>
-        <path
-          d="M14 11V17"
-          stroke="#F90000"
-          stroke-width="1"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></path>
-        <path
-          d="M4 7H20"
-          stroke="#F90000"
-          stroke-width="1"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></path>
-        <path
-          d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z"
-          stroke="#F90000"
-          stroke-width="1"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></path>
-        <path
-          d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z"
-          stroke="#F90000"
-          stroke-width="1"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></path>
+        <style type="text/css">
+          .st0 {
+            fill: #0000f9;
+          }
+        </style>
+        <g>
+          <path
+            class="st0"
+            d="M194.651,414.476c16.23,0,61.349,0,61.349,0s45.111,0,61.35,0c16.222,0,23.587-23.603,14.198-40.285 c-7.072-12.572-18.659-26.826-37.516-34.921c-10.793,7.556-23.905,12-38.032,12c-14.143,0-27.238-4.444-38.032-12 c-18.864,8.095-30.444,22.349-37.523,34.921C171.064,390.873,178.421,414.476,194.651,414.476z"
+          ></path>
+          <path
+            class="st0"
+            d="M256,335.476c27.714,0,50.167-22.444,50.167-50.159v-12.016c0-27.714-22.452-50.174-50.167-50.174 c-27.714,0-50.174,22.46-50.174,50.174v12.016C205.826,313.032,228.286,335.476,256,335.476z"
+          ></path>
+          <path
+            class="st0"
+            d="M404.977,56.889h-75.834v16.254c0,31.365-25.524,56.889-56.889,56.889h-32.508 c-31.365,0-56.889-25.524-56.889-56.889V56.889h-75.833c-25.445,0-46.072,20.627-46.072,46.071v362.969 c0,25.444,20.627,46.071,46.072,46.071h297.952c25.444,0,46.071-20.627,46.071-46.071V102.96 C451.048,77.516,430.421,56.889,404.977,56.889z M402.286,463.238H109.714V150.349h292.572V463.238z"
+          ></path>
+          <path
+            class="st0"
+            d="M239.746,113.778h32.508c22.406,0,40.635-18.23,40.635-40.635V40.635C312.889,18.23,294.659,0,272.254,0 h-32.508c-22.405,0-40.635,18.23-40.635,40.635v32.508C199.111,95.547,217.341,113.778,239.746,113.778z M231.619,40.635 c0-4.492,3.635-8.127,8.127-8.127h32.508c4.493,0,8.127,3.635,8.127,8.127v16.254c0,4.492-3.634,8.127-8.127,8.127h-32.508 c-4.492,0-8.127-3.635-8.127-8.127V40.635z"
+          ></path>
+        </g>
       </g></svg
     >
-    Удалить</a
-  >
+    Сотрудники
+  </a>
 </nav>
 <slot />
 
