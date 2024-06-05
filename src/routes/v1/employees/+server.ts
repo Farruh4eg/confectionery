@@ -52,5 +52,20 @@ export const DELETE: RequestHandler = async ({ request }) => {
 
 export const GET: RequestHandler = async ({ url }) => {
   const prisma = getReadOnlyPrisma();
-  return new Response();
+  const employees = await prisma.employee.findMany({
+    include: {
+      Position: {
+        select: {
+          position: true,
+          id: true,
+        },
+      },
+    },
+  });
+  return new Response(JSON.stringify(employees, null, 2), {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    status: 200,
+  });
 };
