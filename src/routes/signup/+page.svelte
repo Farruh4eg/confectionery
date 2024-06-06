@@ -1,7 +1,7 @@
 <script lang="ts">
-  let username: string;
-  let password: string;
-  let confirmPassword: string;
+  let username: string = '';
+  let password: string = '';
+  let confirmPassword: string = '';
   let errorElement: HTMLParagraphElement;
   let registerForm: HTMLFormElement;
   let submitButton: HTMLButtonElement;
@@ -13,43 +13,61 @@
       submitButton.disabled = true;
       errorElement.textContent = '';
       if (
-        username.replaceAll(/['"`;%|]/g, '').trim().length < 4 ||
-        password.replaceAll(/['"`;%|]/g, '').trim().length < 8
+        username.replace(/['"`;%|]/g, '').trim().length < 4 ||
+        password.replace(/['"`;%|]/g, '').trim().length < 8
       ) {
         errorElement.textContent =
           'Некоррекные данные. Попробуйте снова через 5 секунд';
         setTimeout(() => {
           window.location.reload();
         }, 5000);
-      }
+      } else {
+        const response = await fetch('/v1/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username,
+            password,
+          }),
+        });
 
-      const response = await fetch('/v1/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-      });
-
-      if (response.ok) {
-        errorElement.classList.add('text-green-500');
-        errorElement.textContent =
-          'Учетная запись создана успешно. Вы будете перенаправлены на страницу входа';
-        setTimeout(() => {
-          window.location.href = '/login';
-        }, 2000);
-      } else if (response.status == 409) {
-        errorElement.textContent =
-          'Пользователь уже существует. Если это вы, попробуйте войти.';
-        submitButton.disabled = false;
-      } else if (response.status == 400) {
-        errorElement.textContent =
-          'Имя пользователя должно быть от 4 символов. Пароль должен быть от 8 символов.';
-        submitButton.disabled = false;
+        if (response.ok) {
+          errorElement.classList.add('text-green-500');
+          errorElement.textContent =
+            'Учетная запись создана успешно. Вы будете перенаправлены на страницу входа';
+          setTimeout(() => {
+            window.location.href = '/login';
+          }, 2000);
+        } else if (response.status == 409) {
+          errorElement.textContent =
+            'Пользователь уже существует. Если это вы, попробуйте войти.';
+          submitButton.disabled = false;
+        } else if (response.status == 400) {
+          errorElement.textContent =
+            'Имя пользователя должно быть от 4 символов. Пароль должен быть от 8 символов.';
+          submitButton.disabled = false;
+        } else {
+          errorElement.textContent = 'Произошла ошибка. Попробуйте снова.';
+          submitButton.disabled = false;
+        }
       }
+    }
+  }
+
+  function sanitizeInput(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const regex = /^[a-zA-Zа-яА-ЯёЁ]*$/;
+    if (!regex.test(inputElement.value)) {
+      inputElement.value = inputElement.value.replace(/[^a-zA-Zа-яА-ЯёЁ]/g, '');
+    }
+    if (inputElement.name === 'username') {
+      username = inputElement.value;
+    } else if (inputElement.name === 'password') {
+      password = inputElement.value;
+    } else if (inputElement.name === 'confirmPassword') {
+      confirmPassword = inputElement.value;
     }
   }
 </script>
@@ -65,12 +83,13 @@
   >
     <h1 class="h-max text-3xl text-gray-700 font-bold">Регистрация</h1>
     <section class="flex flex-col justify-center w-full gap-y-2 items-center">
-      <label for="nickname"> Логин </label>
+      <label for="username"> Логин </label>
       <input
         type="text"
-        name="nickname"
+        name="username"
         class="w-7/12 box-content py-2 px-5 rounded-lg shadow-md border border-gray-300"
         bind:value={username}
+        on:input={sanitizeInput}
         minlength="4"
         required
       />
@@ -82,6 +101,7 @@
         name="password"
         class="w-7/12 box-content py-2 px-2 rounded-lg shadow-md border border-gray-300 pr-8"
         bind:value={password}
+        on:input={sanitizeInput}
         required
       />
     </section>
@@ -92,6 +112,7 @@
         name="confirmPassword"
         class="w-7/12 box-content py-2 px-2 rounded-lg shadow-md border border-gray-300 pr-8"
         bind:value={confirmPassword}
+        on:input={sanitizeInput}
         required
       />
     </section>

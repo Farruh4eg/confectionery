@@ -2,17 +2,28 @@
   import { isLoggedIn, role, user } from '$lib/session.js';
   import { onDestroy } from 'svelte';
 
-  export let data;
-
   let isLogged: boolean;
   let errorElement: HTMLSpanElement;
-  let username: string;
-  let password: string;
+  let username: string = '';
+  let password: string = '';
 
   $: {
     if (isLogged) {
       isLoggedIn.set(true);
       localStorage.setItem('isLoggedIn', 'true');
+    }
+  }
+
+  function sanitizeInput(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const regex = /^[a-zA-Zа-яА-ЯёЁ]*$/;
+    if (!regex.test(inputElement.value)) {
+      inputElement.value = inputElement.value.replace(/[^a-zA-Zа-яА-ЯёЁ]/g, '');
+    }
+    if (inputElement.name === 'username') {
+      username = inputElement.value;
+    } else if (inputElement.name === 'password') {
+      password = inputElement.value;
     }
   }
 
@@ -59,11 +70,12 @@
   >
     <h1 class="h-max text-3xl text-gray-700 font-bold">Вход</h1>
     <section class="flex flex-col justify-center w-full gap-y-2 items-center">
-      <label for="nickname"> Логин </label>
+      <label for="username"> Логин </label>
       <input
         type="text"
-        name="nickname"
+        name="username"
         bind:value={username}
+        on:input={sanitizeInput}
         minlength="4"
         class="w-7/12 box-content py-2 px-5 rounded-lg shadow-md border border-gray-300"
         required
@@ -77,6 +89,7 @@
         minlength="8"
         class="w-7/12 box-content py-2 px-2 rounded-lg shadow-md border border-gray-300 relative pr-8"
         bind:value={password}
+        on:input={sanitizeInput}
         required
       />
     </section>
