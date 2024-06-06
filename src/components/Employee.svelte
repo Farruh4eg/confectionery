@@ -17,7 +17,7 @@
   function sanitizeInput(event: Event, key: keyof Employee) {
     const inputElement = event.target as HTMLInputElement;
     const value = inputElement.value.replace(dangerousPattern, '');
-    (employee[key] as unknown as string) = value; // Type assertion
+    (employee[key] as unknown as string) = value;
   }
 
   async function saveEmployee() {
