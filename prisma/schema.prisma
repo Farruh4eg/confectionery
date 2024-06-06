@@ -10,7 +10,7 @@ datasource db {
 model Position {
   id       Int        @id @default(autoincrement())
   position String     @db.VarChar(255)
-  salary   Decimal
+  salary   Float
   Employee Employee[]
 }
 
@@ -62,7 +62,7 @@ model Product {
   id               Int                @id @default(autoincrement())
   id_factory       Int
   name             String             @db.VarChar(255)
-  price            Decimal
+  price            Float
   Order_Product    Order_Product[]
   Factory          Factory            @relation(fields: [id_factory], references: [id])
   Product_Category Product_Category[]
@@ -104,7 +104,7 @@ model Order {
   id              Int             @id @default(autoincrement())
   id_customer     Int
   id_pickup_point Int
-  total_cost      Decimal
+  total_cost      Float
   date            DateTime        @default(now())
   Customer        Customer        @relation(fields: [id_customer], references: [id])
   Pickup_Point    Pickup_Point    @relation(fields: [id_pickup_point], references: [id])
