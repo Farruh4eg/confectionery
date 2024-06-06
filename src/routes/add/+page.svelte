@@ -4,7 +4,7 @@
   let positionDialog: HTMLDialogElement;
   let notice: HTMLParagraphElement;
 
-  const dangerousPattern = /[<>&"'`;|:]/g;
+  const dangerousPattern = /[<>&"'`;|:?/\\]/g;
 
   function sanitizeInput(event: Event) {
     const inputElement = event.target as HTMLInputElement;
@@ -16,8 +16,13 @@
     const lastname = formData.get('lastname');
     const firstname = formData.get('firstname');
     const patronymic = formData.get('patronymic');
-    const position = formData.get('position');
-    const body = JSON.stringify({ lastname, firstname, patronymic, position });
+    const id_position = formData.get('position');
+    const body = JSON.stringify({
+      lastname,
+      firstname,
+      patronymic,
+      id_position,
+    });
 
     const response = await fetch('/v1/employees', {
       method: 'POST',

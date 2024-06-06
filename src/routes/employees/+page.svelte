@@ -38,7 +38,7 @@
   class="w-[1000px] bg-white rounded-lg shadow-md mx-auto flex flex-col items-center gap-y-4 p-4"
 >
   <h1 class="font-bold text-3xl w-full flex justify-center py-2">
-    Редактировать сотрудника
+    Список сотрудников
   </h1>
   <input
     type="search"
@@ -54,11 +54,37 @@
       <th class="border border-gray-300 py-2 px-4 text-left">Имя</th>
       <th class="border border-gray-300 py-2 px-4 text-left">Отчество</th>
       <th class="border border-gray-300 py-2 px-4 text-left">Должность</th>
-      <th class="border border-gray-300 py-2 px-4 text-left"></th>
-      <th class="border border-gray-300 py-2 px-4 text-left"></th>
     </thead>
     {#each filteredEmployees as employee}
-      <Employee {employee} positions={data.positions} />
+      <tr>
+        <td class="text-center border border-gray-300">
+          <input
+            type="text"
+            bind:value={employee.lastname}
+            disabled
+            class=" p-1"
+          />
+        </td>
+        <td class="text-center border border-gray-300">
+          <input
+            type="text"
+            bind:value={employee.firstname}
+            disabled
+            class=" p-1"
+          />
+        </td>
+        <td class="text-center border border-gray-300">
+          <input
+            type="text"
+            bind:value={employee.patronymic}
+            disabled
+            class=" p-1"
+          />
+        </td>
+        <td class="text-center border border-gray-300">
+          <input type="text" bind:value={employee.Position.position} disabled />
+        </td>
+      </tr>
     {/each}
   </table>
 </main>
