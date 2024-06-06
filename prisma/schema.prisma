@@ -15,14 +15,14 @@ model Position {
 }
 
 model Employee {
-  id                    Int                     @id @default(autoincrement())
-  lastname              String                  @db.VarChar(255)
-  firstname             String                  @db.VarChar(255)
-  patronymic            String                  @db.VarChar(255)
+  id                    Int                    @id @default(autoincrement())
+  lastname              String                 @db.VarChar(255)
+  firstname             String                 @db.VarChar(255)
+  patronymic            String                 @db.VarChar(255)
   id_position           Int
-  Position              Position                @relation(fields: [id_position], references: [id], onUpdate: Cascade)
-  Factory_Employee      Factory_Employee[]
-  Pickup_Point_Employee Pickup_Point_Employee[]
+  Position              Position               @relation(fields: [id_position], references: [id])
+  Factory_Employee      Factory_Employee?
+  Pickup_Point_Employee Pickup_Point_Employee?
   Product_Employee      Product_Employee[]
 }
 
@@ -38,24 +38,24 @@ model Factory_Employee {
   id          Int      @id @default(autoincrement())
   id_factory  Int
   id_employee Int      @unique
-  Factory     Factory  @relation(fields: [id_factory], references: [id], onUpdate: Cascade)
-  Employee    Employee @relation(fields: [id_employee], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Employee    Employee @relation(fields: [id_employee], references: [id], onDelete: Cascade)
+  Factory     Factory  @relation(fields: [id_factory], references: [id])
 }
 
 model Pickup_Point {
   id                    Int                     @id @default(autoincrement())
   address               String
   working_hours         String
-  Pickup_Point_Employee Pickup_Point_Employee[]
   Order                 Order[]
+  Pickup_Point_Employee Pickup_Point_Employee[]
 }
 
 model Pickup_Point_Employee {
   id              Int          @id @default(autoincrement())
   id_pickup_point Int
   id_employee     Int          @unique
-  Pickup_Point    Pickup_Point @relation(fields: [id_pickup_point], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  Employee        Employee     @relation(fields: [id_employee], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Employee        Employee     @relation(fields: [id_employee], references: [id], onDelete: Cascade)
+  Pickup_Point    Pickup_Point @relation(fields: [id_pickup_point], references: [id], onDelete: Cascade)
 }
 
 model Product {
@@ -63,10 +63,10 @@ model Product {
   id_factory       Int
   name             String             @db.VarChar(255)
   price            Decimal
-  Factory          Factory            @relation(fields: [id_factory], references: [id], onUpdate: Cascade)
+  Order_Product    Order_Product[]
+  Factory          Factory            @relation(fields: [id_factory], references: [id])
   Product_Category Product_Category[]
   Product_Employee Product_Employee[]
-  Order_Product    Order_Product[]
 }
 
 model Category {
@@ -79,16 +79,16 @@ model Product_Category {
   id          Int      @id @default(autoincrement())
   id_product  Int
   id_category Int
-  Product     Product  @relation(fields: [id_product], references: [id])
   Category    Category @relation(fields: [id_category], references: [id])
+  Product     Product  @relation(fields: [id_product], references: [id])
 }
 
 model Product_Employee {
   id          Int      @id @default(autoincrement())
   id_employee Int
   id_product  Int
-  Employee    Employee @relation(fields: [id_employee], references: [id], onUpdate: Cascade)
-  Product     Product  @relation(fields: [id_product], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  Employee    Employee @relation(fields: [id_employee], references: [id])
+  Product     Product  @relation(fields: [id_product], references: [id], onDelete: Cascade)
 }
 
 model Customer {
@@ -106,8 +106,8 @@ model Order {
   id_pickup_point Int
   total_cost      Decimal
   date            DateTime        @default(now())
-  Customer        Customer        @relation(fields: [id_customer], references: [id], onUpdate: Cascade)
-  Pickup_Point    Pickup_Point    @relation(fields: [id_pickup_point], references: [id], onUpdate: Cascade)
+  Customer        Customer        @relation(fields: [id_customer], references: [id])
+  Pickup_Point    Pickup_Point    @relation(fields: [id_pickup_point], references: [id])
   Order_Product   Order_Product[]
 }
 
@@ -115,6 +115,13 @@ model Order_Product {
   id         Int     @id @default(autoincrement())
   id_order   Int
   id_product Int
-  Order      Order   @relation(fields: [id_order], references: [id], onUpdate: Cascade)
-  Product    Product @relation(fields: [id_product], references: [id], onUpdate: Cascade)
+  Order      Order   @relation(fields: [id_order], references: [id])
+  Product    Product @relation(fields: [id_product], references: [id])
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  username String @db.VarChar(255)
+  password String @db.VarChar(255)
+  role     String @default("default") @db.VarChar(16)
 }

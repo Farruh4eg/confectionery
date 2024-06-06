@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import Employee from '../../components/Employee.svelte';
 
   interface Employees {
     id: number;
