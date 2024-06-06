@@ -22,8 +22,6 @@
     }
     if (inputElement.name === 'username') {
       username = inputElement.value;
-    } else if (inputElement.name === 'password') {
-      password = inputElement.value;
     }
   }
 
