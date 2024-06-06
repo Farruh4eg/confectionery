@@ -15,14 +15,14 @@ model Position {
 }
 
 model Employee {
-  id                    Int                    @id @default(autoincrement())
-  lastname              String                 @db.VarChar(255)
-  firstname             String                 @db.VarChar(255)
-  patronymic            String                 @db.VarChar(255)
+  id                    Int                     @id @default(autoincrement())
+  lastname              String                  @db.VarChar(255)
+  firstname             String                  @db.VarChar(255)
+  patronymic            String                  @db.VarChar(255)
   id_position           Int
-  Position              Position               @relation(fields: [id_position], references: [id])
-  Factory_Employee      Factory_Employee?
-  Pickup_Point_Employee Pickup_Point_Employee?
+  Position              Position                @relation(fields: [id_position], references: [id])
+  Factory_Employee      Factory_Employee[]
+  Pickup_Point_Employee Pickup_Point_Employee[]
   Product_Employee      Product_Employee[]
 }
 
@@ -37,7 +37,7 @@ model Factory {
 model Factory_Employee {
   id          Int      @id @default(autoincrement())
   id_factory  Int
-  id_employee Int      @unique
+  id_employee Int
   Employee    Employee @relation(fields: [id_employee], references: [id], onDelete: Cascade)
   Factory     Factory  @relation(fields: [id_factory], references: [id])
 }
@@ -53,7 +53,7 @@ model Pickup_Point {
 model Pickup_Point_Employee {
   id              Int          @id @default(autoincrement())
   id_pickup_point Int
-  id_employee     Int          @unique
+  id_employee     Int
   Employee        Employee     @relation(fields: [id_employee], references: [id], onDelete: Cascade)
   Pickup_Point    Pickup_Point @relation(fields: [id_pickup_point], references: [id], onDelete: Cascade)
 }
