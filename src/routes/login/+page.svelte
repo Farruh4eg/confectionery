@@ -14,17 +14,6 @@
     }
   }
 
-  function sanitizeInput(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    const regex = /^[a-zA-Zа-яА-ЯёЁ]*$/;
-    if (!regex.test(inputElement.value)) {
-      inputElement.value = inputElement.value.replace(/[^a-zA-Zа-яА-ЯёЁ]/g, '');
-    }
-    if (inputElement.name === 'username') {
-      username = inputElement.value;
-    }
-  }
-
   async function submitForm() {
     const response = await fetch('/v1/login', {
       method: 'POST',
@@ -73,7 +62,6 @@
         type="text"
         name="username"
         bind:value={username}
-        on:input={sanitizeInput}
         minlength="4"
         class="w-7/12 box-content py-2 px-5 rounded-lg shadow-md border border-gray-300"
         required
@@ -87,7 +75,6 @@
         minlength="8"
         class="w-7/12 box-content py-2 px-2 rounded-lg shadow-md border border-gray-300 relative pr-8"
         bind:value={password}
-        on:input={sanitizeInput}
         required
       />
     </section>

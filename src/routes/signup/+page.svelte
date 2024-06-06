@@ -55,17 +55,6 @@
       }
     }
   }
-
-  function sanitizeInput(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    const regex = /^[a-zA-Zа-яА-ЯёЁ]*$/;
-    if (!regex.test(inputElement.value)) {
-      inputElement.value = inputElement.value.replace(/[^a-zA-Zа-яА-ЯёЁ]/g, '');
-    }
-    if (inputElement.name === 'username') {
-      username = inputElement.value;
-    }
-  }
 </script>
 
 <section
@@ -85,7 +74,6 @@
         name="username"
         class="w-7/12 box-content py-2 px-5 rounded-lg shadow-md border border-gray-300"
         bind:value={username}
-        on:input={sanitizeInput}
         minlength="4"
         required
       />
@@ -97,7 +85,6 @@
         name="password"
         class="w-7/12 box-content py-2 px-2 rounded-lg shadow-md border border-gray-300 pr-8"
         bind:value={password}
-        on:input={sanitizeInput}
         required
       />
     </section>
@@ -108,7 +95,6 @@
         name="confirmPassword"
         class="w-7/12 box-content py-2 px-2 rounded-lg shadow-md border border-gray-300 pr-8"
         bind:value={confirmPassword}
-        on:input={sanitizeInput}
         required
       />
     </section>
