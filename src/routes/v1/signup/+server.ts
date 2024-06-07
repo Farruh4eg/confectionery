@@ -10,6 +10,25 @@ export const POST: RequestHandler = async ({ request }) => {
   };
   let { username, password } = body;
 
+  if (
+    username.replaceAll(/['"`;%|]/g, '').trim().length < 4 ||
+    password.replaceAll(/['"`;%|]/g, '').trim().length < 8
+  ) {
+    return new Response(
+      JSON.stringify(
+        { success: false, message: 'Данные введены некорректно' },
+        null,
+        2
+      ),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        status: 400,
+      }
+    );
+  }
+
   const userExists = await prisma.user.findFirst({
     where: {
       username,
