@@ -5,8 +5,11 @@ import bcrypt from 'bcrypt';
 export const POST: RequestHandler = async ({ request }) => {
   const prisma = getReadOnlyPrisma();
   const body = (await request.json()) as { username: string; password: string };
-  const username = body.username;
-  const password = body.password;
+  let username = body.username;
+  let password = body.password;
+
+  username = username.replaceAll(/['"`;%|]/g, '').trim();
+  password = password.replaceAll(/['"`;%|]/g, '').trim();
 
   const sensitiveUser = await prisma.user.findFirst({
     where: {

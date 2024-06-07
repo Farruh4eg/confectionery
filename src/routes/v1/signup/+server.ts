@@ -10,10 +10,10 @@ export const POST: RequestHandler = async ({ request }) => {
   };
   let { username, password } = body;
 
-  if (
-    username.replaceAll(/['"`;%|]/g, '').trim().length < 4 ||
-    password.replaceAll(/['"`;%|]/g, '').trim().length < 8
-  ) {
+  username = username.replaceAll(/['"`;%|]/g, '').trim();
+  password = password.replaceAll(/['"`;%|]/g, '').trim();
+
+  if (username.length < 4 || password.length < 8) {
     return new Response(
       JSON.stringify(
         { success: false, message: 'Данные введены некорректно' },
