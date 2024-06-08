@@ -8,8 +8,8 @@ export const POST: RequestHandler = async ({ request }) => {
     username: string;
     password: string;
   };
-  let { username, password } = body;
 
+  let { username, password } = body;
   username = username.replaceAll(/['"`;%|]/g, '').trim();
   password = password.replaceAll(/['"`;%|]/g, '').trim();
 
