@@ -26,7 +26,7 @@ git clone http://172.20.7.4:3000/Farruh4eg/confectionery.git
 ```bash
 cd папка_проекта
 ```
-4. Постройте и запустите Docker образ:
+4. Постройте и запустите Docker контейнер:
 ```bash
 docker-compose up --build
 ```
