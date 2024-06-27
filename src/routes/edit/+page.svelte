@@ -40,7 +40,7 @@
   });
 
   $: {
-    role = user?.role;
+    role = user?.Role.role;
   }
 </script>
 
