@@ -13,7 +13,7 @@
   });
 
   $: {
-    role = user?.role;
+    role = user?.Role.role;
     if (!role) {
       isLoggedIn.set(false);
     } else {
